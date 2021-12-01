@@ -8,13 +8,10 @@
                 (mapcar #'parse-integer))))
 
 (defun n-increases (readings)
-  "Count the number of times the readings increase"
-  (loop :for (r1 r2) :on readings :by #'cdr
-        :with i = 0
-        :if (and r1 r2 (> r2 r1))
-          :count i))
+  (loop :for (x y) :on readings
+        :count (and x y (> y x))))
 
 (defun sum-group-by-3 (readings)
-  (loop :for (r1 r2 r3) :on readings
-        :while (and r1 r2 r3)
-        :collect (+ r1 r2 r3)))
+  (loop :for (x y z) :on readings
+        :while (and x y z)
+        :collect (+ x y z)))
