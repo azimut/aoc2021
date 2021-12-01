@@ -3,8 +3,7 @@
 (defun get-integer-input-for-day (day)
   (let ((day-path (format nil "static/day/~d/input" day)))
     (arrows:->> (asdf:system-relative-pathname :aoc2021 day-path)
-                (alexandria:read-file-into-string)
-                (cl-ppcre:split "\\n")
+                (uiop:read-file-lines)
                 (mapcar #'parse-integer))))
 
 (defun n-increases (readings)
