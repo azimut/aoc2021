@@ -11,9 +11,39 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      - name: Grant All Perms to Make Cache Restoring Possible
+        run: |
+          sudo mkdir -p /usr/local/etc/roswell
+          sudo chown "${USER}" /usr/local/etc/roswell
+          sudo chown "${USER}" /usr/local/bin
+      - uses: actions/cache@v2
+        id: cache
+        env:
+          cache-name: cache-roswell
+        with:
+          path: |
+            /usr/local/bin/ros
+            /usr/local/etc/roswell
+            ~/.cache/common-lisp/
+            ~/.roswell
+            .qlot
+          key: "${{ env.cache-name }}-${{ github.sha }}"
+          restore-keys: "${{ env.cache-name }}"
+      - name: Restore Path To Cached Files
+        run: |
+          echo $HOME/.roswell/bin >> $GITHUB_PATH
+          echo .qlot/bin >> $GITHUB_PATH
+
       - uses: 40ants/setup-lisp@v1
         with:
           asdf-system: aoc2021
-      - uses: 40ants/run-tests@v2
-        with:
-          asdf-system: aoc2021
+
+      - name: run tests
+        run: ros -e "(ql:quickload :aoc2021/test)" -e "(ql:quickload :parachute)" -e "(unless (parachute:test 'aoc2021-test) (error 'testfailed))"
+
+      - name: DEBUG SHELL
+        uses: mxschmitt/action-tmate@v3
+        if: ${{ failure() }}
+        timeout-minutes: 15
+
