@@ -15,5 +15,6 @@
 (asdf:defsystem #:aoc2021/test
   :depends-on (#:aoc2021 #:parachute)
   :pathname "t"
-  :components ((:file "package"))
+  :components ((:file "package")
+               (:file "tests"))
   :perform (asdf:test-op (op c) (uiop:symbol-call :parachute :test :aoc2021-test)))
