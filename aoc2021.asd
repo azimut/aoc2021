@@ -6,9 +6,11 @@
   :serial t
   :pathname "src"
   :depends-on (#:alexandria
-               #:arrows)
+               #:arrows
+               #:rtg-math)
   :components ((:file "package")
-               (:file "day1"))
+               (:file "day1")
+               (:file "day2"))
   :in-order-to ((asdf:test-op (asdf:test-op :aoc2021/test))))
 
 (asdf:defsystem #:aoc2021/test
