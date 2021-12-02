@@ -14,5 +14,5 @@
         '(199 200 208 210 200 207 240 269 260 263)))))
 
 (define-test day2
-  (is = 150 (day2-silver (get-test-string-for-day 2)))
-  (is = 900 (day2-gold   (get-test-string-for-day 2))))
+  (is = 150 (day2-silver (slurp (test-file 2))))
+  (is = 900 (day2-gold   (slurp (test-file 2)))))
