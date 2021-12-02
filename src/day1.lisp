@@ -6,7 +6,7 @@
                 (uiop:read-file-lines)
                 (mapcar #'parse-integer))))
 
-(defun n-increases (readings)
+(defun count-increases (readings)
   (loop :for (x y) :on readings
         :count (and x y (> y x))))
 

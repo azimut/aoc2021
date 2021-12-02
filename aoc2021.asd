@@ -6,8 +6,7 @@
   :serial t
   :pathname "src"
   :depends-on (#:alexandria
-               #:arrows
-               #:cl-ppcre)
+               #:arrows)
   :components ((:file "package")
                (:file "day1"))
   :in-order-to ((asdf:test-op (asdf:test-op :aoc2021/test))))
