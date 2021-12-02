@@ -9,6 +9,7 @@
                #:arrows
                #:rtg-math)
   :components ((:file "package")
+               (:file "utils")
                (:file "day1")
                (:file "day2"))
   :in-order-to ((asdf:test-op (asdf:test-op :aoc2021/test))))

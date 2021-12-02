@@ -1,54 +1,52 @@
 (in-package #:aoc2021)
 
-(defun get-string-for-day (day)
-  (let ((day-path (format nil "static/day/~d/input" day)))
-    (arrows:->> (asdf:system-relative-pathname :aoc2021 day-path)
-                (alexandria:read-file-into-string))))
-
-(defun reduce-readings (readings)
-  (reduce #'v2:+ readings :initial-value (v! 0 0)))
-
-(defun reading-to-pair (reading)
-  (destructuring-bind (dir ammount) (words reading)
-    (let ((x (parse-integer ammount)))
-      (alexandria:eswitch (dir :test #'string=)
-        ("forward" (v! x    0))
-        ("down"    (v! 0    x))
-        ("up"      (v! 0 (- x)))))))
+;; Lesson learned:
+;; - Not use floats what should be INT
 
 (defun day2-silver (text)
   (let ((v (arrows:->> text
                        (lines)
                        (mapcar #'reading-to-pair)
                        (reduce-readings))))
-    (* (x v) (y v))))
+    (* (aref v 0) (aref v 1))))
 
-(defun reading-to-thrice (reading)
+(defun reduce-readings (readings)
+  (reduce (lambda (v1 v2)
+            (vector (+ (aref v1 0) (aref v2 0))
+                    (+ (aref v1 1) (aref v2 1))))
+          readings :initial-value (vector 0 0)))
+
+(defun reading-to-pair (reading)
   (destructuring-bind (dir ammount) (words reading)
     (let ((x (parse-integer ammount)))
       (alexandria:eswitch (dir :test #'string=)
-        ("forward" (v! x 0    0))
-        ("down"    (v! 0 0    x))
-        ("up"      (v! 0 0 (- x)))))))
-
-(defun reduce-readings-thrice (readings)
-  (reduce (lambda (acc new)
-            (if (> (x new) 0)
-                (v:+ acc (v! (x new)
-                             (* (x new) (z acc))
-                             0))
-                (v:+ acc new)))
-          readings
-          :initial-value (v! 0 0 0)))
+        ("forward" (vector x    0))
+        ("down"    (vector 0    x))
+        ("up"      (vector 0 (- x)))))))
 
 (defun day2-gold (text)
   (let ((v (arrows:->> text
                        (lines)
                        (mapcar #'reading-to-thrice)
                        (reduce-readings-thrice))))
-    (* (round (x v)) (round (y v)))))
+    (* (aref v 0) (aref v 1))))
 
-(defun lines (text) (cl-ppcre:split #\NewLine text))
-(defun words (line) (cl-ppcre:split #\Space   line))
+(defun reduce-readings-thrice (readings)
+  (reduce (lambda (acc new)
+            (if (> (aref new 0) 0)
+                (vector (+ (aref acc 0) (aref new 0))
+                        (+ (aref acc 1) (* (aref acc 2) (aref new 0)))
+                        (+ (aref acc 2) (aref new 2)))
+                (vector (+ (aref acc 0) (aref new 0))
+                        (+ (aref acc 1) (aref new 1))
+                        (+ (aref acc 2) (aref new 2)))))
+          readings
+          :initial-value (vector 0 0 0)))
 
-
+(defun reading-to-thrice (reading)
+  (destructuring-bind (dir ammount) (words reading)
+    (let ((x (parse-integer ammount)))
+      (alexandria:eswitch (dir :test #'string=)
+        ("forward" (vector x 0    0))
+        ("down"    (vector 0 0    x))
+        ("up"      (vector 0 0 (- x)))))))
