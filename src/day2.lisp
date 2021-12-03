@@ -14,7 +14,7 @@
   (decf (depth obj) qty))
 
 (defun readarray (text)
-  (-> text str:words str:unlines str:lines))
+  (-> text words unlines lines))
 
 (defun day2-silver (text)
   (let ((silver (make-instance 'silver)))
@@ -26,7 +26,7 @@
 
 (defun day2-gold (text)
   (let ((v (arrows:->> text
-                       (str:lines)
+                       (lines)
                        (mapcar #'reading-to-thrice)
                        (reduce-readings-thrice))))
     (* (aref v 0) (aref v 1))))

@@ -1,5 +1,5 @@
 (uiop:define-package #:aoc2021
-  (:use #:cl #:arrows)
+  (:use #:cl #:arrows #:str)
   (:export
    ;; util.lisp
    #:slurp
