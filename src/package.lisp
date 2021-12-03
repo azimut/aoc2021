@@ -11,4 +11,10 @@
    ;; Day 2
    #:forward #:down #:up
    #:day2-silver
-   #:day2-gold))
+   #:day2-gold
+   ;; Day 3
+   #:gamma
+   #:epsilon
+   #:parse-binary
+   #:day3-silver
+   #:day3-gold))

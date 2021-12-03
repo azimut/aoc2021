@@ -11,7 +11,8 @@
   :components ((:file "package")
                (:file "utils")
                (:file "day1")
-               (:file "day2"))
+               (:file "day2")
+               (:file "day3"))
   :in-order-to ((asdf:test-op (asdf:test-op :aoc2021/test))))
 
 (asdf:defsystem #:aoc2021/test
