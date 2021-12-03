@@ -7,7 +7,8 @@
   :pathname "src"
   :depends-on (#:alexandria
                #:arrows
-               #:str)
+               #:str
+               #:serapeum)
   :components ((:file "package")
                (:file "utils")
                (:file "day1")

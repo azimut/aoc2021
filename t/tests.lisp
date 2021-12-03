@@ -9,10 +9,17 @@
   (is = 900 (day2-gold   (slurp (test-file 2)))))
 
 (define-test day3
-  (is = 22 (gamma (mapcar #'parse-binary
-                          (str:lines (slurp (test-file 3))))))
-  (is = 9 (epsilon (mapcar #'parse-binary
-                           (str:lines (slurp (test-file 3))))))
-  (is = 198 (day3-silver (slurp (test-file 3))))
-  ;; (is = 1 (day3-gold   (slurp (test-file 3))))
-  )
+  ;; (is = 22 (gamma (mapcar #'parse-binary
+  ;;                         (str:lines (slurp (test-file 3))))))
+  ;; (is = 9 (epsilon (mapcar #'parse-binary
+  ;;                          (str:lines (slurp (test-file 3))))))
+  ;; (is = 198 (day3-silver (slurp (test-file 3))))
+  (is = 230 (day3-gold (slurp (test-file 3))))
+  (is =  23 (arrows:->> (test-file 3)
+                        (slurp)
+                        (str:lines)
+                        (o2)))
+  (is =  10 (arrows:->> (test-file 3)
+                        (slurp)
+                        (str:lines)
+                        (co2))))

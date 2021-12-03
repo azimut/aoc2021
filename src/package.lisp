@@ -17,4 +17,6 @@
    #:epsilon
    #:parse-binary
    #:day3-silver
+   #:o2
+   #:co2
    #:day3-gold))

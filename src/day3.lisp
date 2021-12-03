@@ -38,3 +38,53 @@
           (vector-push-extend #\0 ret)
           (vector-push-extend #\1 ret)))
     (parse-integer (reverse ret) :radix 2)))
+
+
+;;----------------------------------------
+
+(defun day3-gold (text)
+  (* (->> (lines text)
+          (o2))
+     (->> (lines text)
+          (co2))))
+
+(defun frequencies-char (strings i)
+  (->> strings
+       (mapcar (serapeum:op (char _ i)))
+       (serapeum:frequencies)))
+
+(defun highest-frequency (strings i)
+  (let* ((freq  (frequencies-char strings i))
+         (zerof (gethash #\0 freq))
+         (onef  (gethash #\1 freq)))
+    (cond ((not zerof)    #\0)
+          ((not onef)     #\1)
+          ((> zerof onef) #\0)
+          ((= zerof onef) #\1)
+          (t #\1))))
+
+(defun lowest-frequency (strings i)
+  (let* ((freq  (frequencies-char strings i))
+         (zerof (gethash #\0 freq))
+         (onef  (gethash #\1 freq)))
+    (cond ((not zerof)    #\1)
+          ((not onef)     #\0)
+          ((> zerof onef) #\1)
+          ((= zerof onef) #\0)
+          (t #\0))))
+
+(defun  o2 (readings)
+  (dotimes (i (length (first readings)))
+    (let ((char-to-keep (highest-frequency readings i)))
+      (serapeum:filterf
+       readings
+       (serapeum:op (equal char-to-keep (char _ i))))))
+  (parse-binary (first readings)))
+
+(defun co2 (readings)
+  (dotimes (i (length (first readings)))
+    (let ((char-to-keep (lowest-frequency readings i)))
+      (serapeum:filterf
+       readings
+       (serapeum:op (eql char-to-keep (char _ i))))))
+  (parse-binary (first readings)))
