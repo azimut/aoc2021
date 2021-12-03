@@ -1,44 +1,34 @@
 (in-package #:aoc2021)
 
 (defun day3-silver (text)
-  (* (->> (lines text)
-          (mapcar (lambda (i) (parse-integer i :radix 2)))
-          (gamma))
-     (->> (lines text)
-          (mapcar (lambda (i) (parse-integer i :radix 2)))
-          (epsilon))))
+  (* (epsilon (lines text))
+     (gamma   (lines text))))
 
-(defun parse-binary (i)
-  (parse-integer i :radix 2))
+(defun epsilon (lines)
+  (mapf #'decode-epsilon lines))
 
-(defun bit-aref (number pos)
-  (if (logbitp pos number) 1 0))
+(defun gamma (lines)
+  (mapf #'decode-gamma lines))
 
-(defun bit-frequency (readings)
-  (let ((state (make-array '(12 2))))
-    (dolist (reading readings)
-      (dotimes (i 12)
-        (incf (aref state i (bit-aref reading i)))))
-    state))
+(defun mapf (f lines)
+  (-> (loop :for i :to (1- (length (first lines)))
+            :collect (funcall f (encode-column i lines)))
+      (coerce 'string)
+      (parse-integer :radix 2)))
 
-(defun gamma (readings)
-  (let ((freq (bit-frequency readings))
-        (ret  (make-array 0 :element-type 'character :adjustable t :fill-pointer 0)))
-    (dotimes (i 12)
-      (if (> (aref freq i 0) (aref freq i 1))
-          (vector-push-extend #\0 ret)
-          (vector-push-extend #\1 ret)))
-    (parse-integer (reverse ret) :radix 2)))
+(defun encode-column (i lines)
+  (->> lines
+       (mapcar (rcurry #'char i))
+       (mapcar #'encode-char)
+       (reduce #'+)))
 
-(defun epsilon (readings)
-  (let ((freq (bit-frequency readings))
-        (ret  (make-array 0 :element-type 'character :adjustable t :fill-pointer 0)))
-    (dotimes (i 12)
-      (if (< (aref freq i 0) (aref freq i 1))
-          (vector-push-extend #\0 ret)
-          (vector-push-extend #\1 ret)))
-    (parse-integer (reverse ret) :radix 2)))
+(defun encode-char (char)
+  (if (char= #\0 char)
+      (- 1)
+      (+ 1)))
 
+(defun decode-gamma   (int) (if (> int 0) #\1 #\0))
+(defun decode-epsilon (int) (if (> int 0) #\0 #\1))
 
 ;;----------------------------------------
 
@@ -72,6 +62,9 @@
           ((> zerof onef) #\1)
           ((= zerof onef) #\0)
           (t #\0))))
+
+(defun parse-binary (i)
+  (parse-integer i :radix 2))
 
 (defun  o2 (readings)
   (dotimes (i (length (first readings)))

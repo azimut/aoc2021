@@ -1,5 +1,5 @@
 (uiop:define-package #:aoc2021
-  (:use #:cl #:arrows #:str)
+  (:mix #:cl #:arrows #:alexandria #:str)
   (:export
    ;; util.lisp
    #:slurp
@@ -15,7 +15,6 @@
    ;; Day 3
    #:gamma
    #:epsilon
-   #:parse-binary
    #:day3-silver
    #:o2
    #:co2
