@@ -14,10 +14,7 @@
   (decf (depth obj) qty))
 
 (defun readarray (text)
-  (-> text
-      (str:words)
-      (str:unlines)
-      (str:lines)))
+  (-> text str:words str:unlines str:lines))
 
 (defun day2-silver (text)
   (let ((silver (make-instance 'silver)))

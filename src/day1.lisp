@@ -1,10 +1,15 @@
 (in-package #:aoc2021)
 
-(defun get-integer-input-for-day (day)
-  (let ((day-path (format nil "static/day/~d/input" day)))
-    (arrows:->> (asdf:system-relative-pathname :aoc2021 day-path)
-                (uiop:read-file-lines)
-                (mapcar #'parse-integer))))
+(defun day1-silver (text)
+  (->> (lines text)
+       (mapcar #'parse-integer)
+       (count-increases)))
+
+(defun day1-gold (text)
+  (->> (lines text)
+       (mapcar #'parse-integer)
+       (sum-group-by-3)
+       (count-increases)))
 
 (defun count-increases (readings)
   (loop :for (x y) :on readings
