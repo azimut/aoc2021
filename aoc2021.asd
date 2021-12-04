@@ -8,6 +8,7 @@
   :depends-on (#:alexandria
                #:arrows
                #:str
+               #:cl-oju
                #:serapeum)
   :components ((:file "package")
                (:file "utils")

@@ -1,23 +1,15 @@
 (in-package #:aoc2021)
 
-;; Row or Colum = WIN
-;; SCORE? sum of all unmarked      = 188
-;;      x number that make the win = 24
-;;        = 188 x 24 = 4512
-;; Which board will win first?
-;; SCORE?
-
 (defun day4-silver (text)
   (let* ((lines (lines text))
          (raffle (lines-to-raffle-numbers lines))
          (boards (lines-to-boards lines)))
-    (dolist (r raffle)
-      (dolist (b boards)
-        (mark b r)
-        (when (bingo-p b)
-          (print (* (sum-of-unmarked b)
-                    r)) ;; FIXME
-          (return))))))
+    (block nested
+      (dolist (r raffle)
+        (dolist (b boards)
+          (mark b r)
+          (when (bingo-p b)
+            (return-from nested (* r (sum-of-unmarked b)))))))))
 
 (defclass board ()
   ((numbers
@@ -26,6 +18,11 @@
    (hits
     :initform (make-array '(5 5) :initial-element NIL)
     :accessor hits)))
+
+(defmethod print-object ((obj board) stream)
+  (print-unreadable-object (obj stream :type T :identity T)
+    (with-slots (numbers) obj
+      (format stream "~a" numbers))))
 
 (defun numbers-to-board (numbers)
   (loop :with board = (make-board)
@@ -41,12 +38,12 @@
 
 (defun lines-to-boards (lines)
   (->> lines
-       (nthcdr 2)
+       (drop 2)
        (remove-if #'blankp)
        (unlines)
        (words)
        (mapcar #'parse-integer)
-       (cl-oju:partition-n 25 25)
+       (partition-n 25 25)
        (mapcar #'numbers-to-board)))
 
 (defun make-board (&rest args)
@@ -86,4 +83,15 @@
 
 ;;----------------------------------------
 
-(defun day4-gold (text)  0)
+(defun day4-gold (text)
+  (let* ((lines (lines text))
+         (raffle (lines-to-raffle-numbers lines))
+         (boards (lines-to-boards lines))
+         (last-score))
+    (dolist (r raffle)
+      (dolist (b boards)
+        (mark b r)
+        (when (bingo-p b)
+          (setf last-score (* r (sum-of-unmarked b)))
+          (setf boards (remove b boards :test #'equal)))))
+    last-score))

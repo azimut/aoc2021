@@ -1,8 +1,7 @@
 (uiop:define-package #:aoc2021
-  (:mix #:cl #:arrows #:alexandria #:str)
+  (:mix #:cl #:arrows #:alexandria #:cl-oju #:str)
   (:export
    ;; util.lisp
-   #:slurp
    #:test-file
    #:input-file
    ;; Day 1
