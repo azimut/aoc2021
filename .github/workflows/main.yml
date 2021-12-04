@@ -38,15 +38,11 @@ jobs:
       - uses: 40ants/setup-lisp@v1
         with:
           asdf-system: aoc2021
+          qlfile-template: |
+            git cl-oju https://github.com/eigenhombre/cl-oju.git
 
       - name: run tests
         run: |
           ros -e "(ql:quickload :aoc2021/test)" \
               -e "(ql:quickload :parachute)" \
               -e "(when (eq :FAILED (parachute:status (parachute:test 'aoc2021-test))) (error 'testfailed))"
-
-      - name: DEBUG SHELL
-        uses: mxschmitt/action-tmate@v3
-        if: ${{ failure() }}
-        timeout-minutes: 15
-
