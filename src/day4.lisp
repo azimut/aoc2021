@@ -11,6 +11,19 @@
           (when (bingo-p b)
             (return-from nested (* r (sum-of-unmarked b)))))))))
 
+(defun day4-gold (text)
+  (let* ((lines (lines text))
+         (raffle (lines-to-raffle-numbers lines))
+         (boards (lines-to-boards lines))
+         (last-score))
+    (dolist (r raffle)
+      (dolist (b boards)
+        (mark b r)
+        (when (bingo-p b)
+          (setf last-score (* r (sum-of-unmarked b)))
+          (setf boards (remove b boards :test #'equal)))))
+    last-score))
+
 (defclass board ()
   ((numbers
     :initform (make-array '(5 5))
@@ -19,17 +32,8 @@
     :initform (make-array '(5 5) :initial-element NIL)
     :accessor hits)))
 
-(defmethod print-object ((obj board) stream)
-  (print-unreadable-object (obj stream :type T :identity T)
-    (with-slots (numbers) obj
-      (format stream "~a" numbers))))
-
-(defun numbers-to-board (numbers)
-  (loop :with board = (make-board)
-        :for n :in numbers
-        :for i :from 0
-        :do (setf (row-major-aref (numbers board) i) n)
-        :finally (return board)))
+(defun make-board (&rest args)
+  (apply #'make-instance 'board args))
 
 (defun lines-to-raffle-numbers (lines)
   (->> (first lines)
@@ -46,8 +50,16 @@
        (partition-n 25 25)
        (mapcar #'numbers-to-board)))
 
-(defun make-board (&rest args)
-  (apply #'make-instance 'board args))
+(defun numbers-to-board (numbers)
+  (loop :with board = (make-board)
+        :for n :in numbers
+        :for i :from 0
+        :do (setf (row-major-aref (numbers board) i) n)
+        :finally (return board)))
+
+(defmethod bingo-p ((obj board))
+  (or (bingo-row-p obj)
+      (bingo-col-p obj)))
 
 (defmethod bingo-col-p ((obj board))
   (dotimes (c 5)
@@ -67,10 +79,6 @@
          (aref (hits obj) 4 r)
          (return t))))
 
-(defmethod bingo-p ((obj board))
-  (or (bingo-row-p obj)
-      (bingo-col-p obj)))
-
 (defmethod sum-of-unmarked ((obj board))
   (loop :for i :to (1- (array-total-size (hits obj)))
         :unless (row-major-aref (hits obj) i)
@@ -80,18 +88,3 @@
   (loop :for i :to (1- (array-total-size (hits obj)))
         :when (= number (row-major-aref (numbers obj) i))
           :do (setf (row-major-aref (hits obj) i) T)))
-
-;;----------------------------------------
-
-(defun day4-gold (text)
-  (let* ((lines (lines text))
-         (raffle (lines-to-raffle-numbers lines))
-         (boards (lines-to-boards lines))
-         (last-score))
-    (dolist (r raffle)
-      (dolist (b boards)
-        (mark b r)
-        (when (bingo-p b)
-          (setf last-score (* r (sum-of-unmarked b)))
-          (setf boards (remove b boards :test #'equal)))))
-    last-score))
