@@ -39,6 +39,7 @@ jobs:
         with:
           asdf-system: aoc2021
           qlfile-template: |
+            git trivialtests https://github.com/eigenhombre/trivialtests.git
             git cl-oju https://github.com/eigenhombre/cl-oju.git
 
       - name: run tests
