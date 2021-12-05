@@ -80,11 +80,11 @@
          (return t))))
 
 (defmethod sum-of-unmarked ((obj board))
-  (loop :for i :to (1- (array-total-size (hits obj)))
+  (loop :for i :below (array-total-size (hits obj))
         :unless (row-major-aref (hits obj) i)
           :summing (row-major-aref (numbers obj) i)))
 
 (defmethod mark ((obj board) number)
-  (loop :for i :to (1- (array-total-size (hits obj)))
+  (loop :for i :below (array-total-size (hits obj))
         :when (= number (row-major-aref (numbers obj) i))
           :do (setf (row-major-aref (hits obj) i) T)))

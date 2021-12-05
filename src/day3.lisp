@@ -10,9 +10,12 @@
 (defun gamma (lines)
   (mapf #'decode-gamma lines))
 
-(defun mapf (f lines)
-  (-> (loop :for i :to (1- (length (first lines)))
-            :collect (funcall f (encode-column i lines)))
+(defun decode-gamma   (int) (if (> int 0) #\1 #\0))
+(defun decode-epsilon (int) (if (> int 0) #\0 #\1))
+
+(defun mapf (decoder lines)
+  (-> (loop :for i :below (length (first lines))
+            :collect (funcall decoder (encode-column i lines)))
       (coerce 'string)
       (parse-integer :radix 2)))
 
@@ -26,9 +29,6 @@
   (if (char= #\0 char)
       (- 1)
       (+ 1)))
-
-(defun decode-gamma   (int) (if (> int 0) #\1 #\0))
-(defun decode-epsilon (int) (if (> int 0) #\0 #\1))
 
 ;;----------------------------------------
 

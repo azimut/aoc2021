@@ -73,7 +73,7 @@
   (apply #'make-instance 'grid args))
 
 (defmethod n-danger-spots ((obj grid))
-  (loop :for i :to (1- (array-total-size (board obj)))
+  (loop :for i :below (array-total-size (board obj))
         :count (>= (row-major-aref (board obj) i) 2)))
 
 (defmethod draw ((obj grid) (segment segment))
@@ -117,6 +117,7 @@
        (mapply #'make-segment)
        (filter (disjoin #'flat-p #'diagonal-p))))
 
+;; IS NOT: 17656, 30406, 20195
 (defun day5-gold (text)
   (let* ((numbers  (text-to-numbers text))
          (grid     (make-grid :dim (1+ (apply #'max numbers))))
