@@ -1,5 +1,6 @@
 (uiop:define-package #:aoc2021
   (:mix #:cl #:arrows #:alexandria #:cl-oju #:str)
+  (:import-from #:serapeum #:filter #:mapply)
   (:export
    ;; util.lisp
    #:test-file
