@@ -27,10 +27,10 @@
 (defclass board ()
   ((numbers
     :initform (make-array '(5 5))
-    :accessor numbers)
+    :reader numbers)
    (hits
     :initform (make-array '(5 5) :initial-element NIL)
-    :accessor hits)))
+    :reader hits)))
 
 (defun make-board (&rest args)
   (apply #'make-instance 'board args))
