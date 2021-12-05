@@ -20,4 +20,10 @@
    #:day3-gold
    ;; Day 4
    #:day4-silver
-   #:day4-gold))
+   #:day4-gold
+   ;; Day 5
+   #:day5-silver
+   #:day5-gold
+   ;; Day 6
+   #:day6-silver
+   #:day6-gold))
