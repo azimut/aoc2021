@@ -25,5 +25,21 @@
 (defun text-to-fish (text)
   (->> text (split ",") (mapcar #'parse-integer)))
 
-;; 8,907,435  fishes before it dies
-(defun day6-gold   (text) 1)
+;;----------------------------------------
+
+(defun day6-gold (days text)
+  (let ((counters (fishes-to-counters (text-to-fish text))))
+    (dotimes (day days)
+      (setf counters (rotate-fish counters)))
+    (reduce #'+ counters)))
+
+(defun rotate-fish (counters)
+  (let ((rotated (rotate counters -1)))
+    (incf (nth 6 rotated) (lastcar rotated))
+    rotated))
+
+(defun fishes-to-counters (fishes)
+  (let ((counter (make-list (+ 2 7) :initial-element 0)))
+    (dolist (fish fishes)
+      (incf (elt counter fish)))
+    counter))

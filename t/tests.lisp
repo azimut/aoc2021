@@ -31,9 +31,8 @@
   (is = 12 (day5-gold   (slurp (test-file 5)))))
 
 (define-test day6
-  (is = 26   (day6-silver 18 (slurp (test-file 6))))
-  (is = 5934 (day6-silver 80 (slurp (test-file 6))))
-  ;;(is = 1924 (day6-gold   (slurp (test-file 6))))
-  )
+  (is =          26 (day6-silver 18 (slurp (test-file 6))))
+  (is =        5934 (day6-silver 80 (slurp (test-file 6))))
+  (is = 26984457539 (day6-gold  256 (slurp (test-file 6)))))
 
 
