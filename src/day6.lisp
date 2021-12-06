@@ -18,8 +18,9 @@
   (declare (type list fishes) (type fixnum days))
   (dotimes (i days)
     (print i)
-    (length fishes)
-    (setf fishes (age-fishes fishes))))
+    (print (length fishes))
+    (setf fishes (age-fishes fishes)))
+  (length fishes))
 
 (defun text-to-fish (text)
   (->> text (split ",") (mapcar #'parse-integer)))
