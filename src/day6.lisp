@@ -17,8 +17,6 @@
   (declare (optimize (speed 3)))
   (declare (type list fishes) (type fixnum days))
   (dotimes (i days)
-    (print i)
-    (print (length fishes))
     (setf fishes (age-fishes fishes)))
   (length fishes))
 
