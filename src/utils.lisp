@@ -1,5 +1,8 @@
 (in-package #:aoc2021)
 
+(defun mapcat (function &rest lists)
+  (apply #'alexandria:mappend function lists))
+
 (defun mapv (function first-sequence &rest more-sequences)
   (apply #'map 'vector function first-sequence more-sequences))
 

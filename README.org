@@ -1,8 +1,8 @@
-# aoc2021
+* aoc2021
 
 This is a project to do ... something.
 
-## License
+** License
 
 MIT
 
