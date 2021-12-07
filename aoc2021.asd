@@ -17,7 +17,8 @@
                (:file "day3")
                (:file "day4")
                (:file "day5")
-               (:file "day6"))
+               (:file "day6")
+               (:file "day7"))
   :in-order-to ((asdf:test-op (asdf:test-op :aoc2021/test))))
 
 (asdf:defsystem #:aoc2021/test

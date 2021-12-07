@@ -27,4 +27,7 @@
    #:day5-gold
    ;; Day 6
    #:day6-silver
-   #:day6-gold))
+   #:day6-gold
+   ;; Day 7
+   #:day7-silver
+   #:day7-gold))
