@@ -6,16 +6,15 @@
 
 (declaim (inline age-fishes))
 (defun age-fishes (fishes)
-  (declare (optimize (speed 3)))
-  (loop :for fish :in fishes
-        :if (minusp (1- (the fixnum fish)))
+  (declare (optimize (speed 3) (safety 0)))
+  (loop :for fish :of-type fixnum :in fishes
+        :if (minusp (1- fish))
           :append '(6 8)
         :else
-          :collect (1- (the fixnum fish))))
+          :collect (1- fish)))
 
 (defun future-fish (days fishes)
-  (declare (optimize (speed 3)))
-  (declare (type list fishes) (type fixnum days))
+  (declare (optimize (speed 3) (safety 0)) (list fishes) (fixnum days))
   (dotimes (i days)
     (setf fishes (age-fishes fishes)))
   (length fishes))
