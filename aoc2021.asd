@@ -9,7 +9,8 @@
                #:arrows
                #:str
                #:cl-oju
-               #:serapeum)
+               #:serapeum
+               #:iterate)
   :components ((:file "package")
                (:file "utils")
                (:file "day1")
