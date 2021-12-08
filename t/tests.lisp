@@ -39,4 +39,8 @@
     (is = 37 (day7-silver (slurp (test-file 7))))
   (is = 168 (day7-gold   (slurp (test-file 7)))))
 
+(define-test day8
+    (let ((input (day8-parse (test-file 8))))
+      (is = 1 (day8-silver input))
+      (is = 1 (day8-gold   input))))
 
