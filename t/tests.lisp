@@ -46,7 +46,10 @@
 ;;     (is = 1  (day8-gold   input2))))
 
 (define-test day9
-  (let ((input (day9-parse (test-file 8))))
-    (is = 15   (day9-silver input))
-    (is = 1134 (day9-gold input))))
+  (let* ((input1 (day9-silver-parse (test-file 9)))
+         (input2 (day9-gold-parse   (test-file 9)))
+         (array  (first  input2))
+         (mask   (second input2)))
+    (is = 15   (day9-silver input1))
+    (is = 1134 (day9-gold array mask))))
 

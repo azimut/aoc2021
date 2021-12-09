@@ -1,7 +1,7 @@
 (uiop:define-package #:aoc2021
   (:mix #:cl #:arrows #:alexandria #:cl-oju #:str
         #:iterate)
-  (:import-from #:serapeum #:filter #:mapply)
+  (:import-from #:serapeum #:filter #:mapply #:op)
   (:export
    ;; util.lisp
    #:test-file
@@ -40,4 +40,5 @@
    ;; Day 9
    #:day9-silver
    #:day9-gold
-   #:day9-parse))
+   #:day9-silver-parse
+   #:day9-gold-parse))

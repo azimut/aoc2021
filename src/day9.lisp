@@ -1,9 +1,16 @@
 (in-package #:aoc2021)
 
-(defun list-to-array (list)
-  (let ((h (length list))
-        (w (length (first list))))
-    (make-array (list h w) :initial-contents list)))
+(defun day9-silver (array)
+  (->> (mins array)
+       (mapcar #'1+)
+       (reduce #'+)))
+
+(defun mins (array)
+  (iterate outer (for x below (array-dimension array 0))
+    (iterate (for y below (array-dimension array 1))
+      (when (< (aref array x y)
+               (apply #'min (adjacent array x y)))
+        (in outer (collecting (aref array x y)))))))
 
 (defun adjacent (array x y)
   (iterate outer (for dx in '(-1 0 1))
@@ -13,7 +20,12 @@
                  (not (= (abs dx) (abs dy))))
         (in outer (collect (aref array (+ x dx) (+ y dy))))))))
 
-(defun day9-parse (file)
+(defun list-to-array (list)
+  (let ((h (length list))
+        (w (length (first list))))
+    (make-array (list h w) :initial-contents list)))
+
+(defun day9-silver-parse (file)
   (->> file
        (slurp)
        (lines)
@@ -22,16 +34,3 @@
           (map 'list (compose #'parse-integer #'string )
                _)))
        (list-to-array)))
-
-(defun day9-silver (array)
-  (let ((mins ()))
-    (dotimes (x (array-dimension array 0))
-      (dotimes (y (array-dimension array 1))
-        (when (< (aref array x y)
-                 (apply #'min (adjacent array x y)))
-          (push (aref array x y) mins))))
-    (print mins)
-    (reduce #'+ (mapcar #'1+ mins))))
-
-(defun day9-gold-parse (file))
-(defun day9-gold () 0)
