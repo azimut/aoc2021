@@ -6,16 +6,14 @@
     (make-array (list h w) :initial-contents list)))
 
 (defun adjacent (array x y)
-  (loop for dx in '(-1 0 1)
-        appending
-        (loop for dy in '(-1 0 1)
-              when (and (<= 0 (+ x dx) (1- (array-dimension array 0)))
-                        (<= 0 (+ y dy) (1- (array-dimension array 1)))
-                        (not (= (abs dx) (abs dy))))
-                collecting
-                (aref array (+ x dx) (+ y dy)))))
+  (iterate outer (for dx in '(-1 0 1))
+    (iterate (for dy in '(-1 0 1))
+      (when (and (<= 0 (+ x dx) (1- (array-dimension array 0)))
+                 (<= 0 (+ y dy) (1- (array-dimension array 1)))
+                 (not (= (abs dx) (abs dy))))
+        (in outer (collect (aref array (+ x dx) (+ y dy))))))))
 
-(defun day9-silver-parse (file)
+(defun day9-parse (file)
   (->> file
        (slurp)
        (lines)

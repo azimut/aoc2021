@@ -40,5 +40,4 @@
    ;; Day 9
    #:day9-silver
    #:day9-gold
-   #:day9-silver-parse
-   #:day9-gold-parse))
+   #:day9-parse))
