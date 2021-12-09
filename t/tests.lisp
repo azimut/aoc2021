@@ -36,11 +36,18 @@
   (is = 26984457539 (day6-gold  256 (slurp (test-file 6)))))
 
 (define-test day7
-    (is = 37 (day7-silver (slurp (test-file 7))))
+  (is = 37 (day7-silver (slurp (test-file 7))))
   (is = 168 (day7-gold   (slurp (test-file 7)))))
 
-(define-test day8
-    (let ((input (day8-parse (test-file 8))))
-      (is = 1 (day8-silver input))
-      (is = 1 (day8-gold   input))))
+;; (define-test day8
+;;   (let ((input1 (day8-silver-parse (test-file 8)))
+;;         (input2 (day8-gold-parse (test-file 8))))
+;;     (is = 26 (day8-silver input1))
+;;     (is = 1  (day8-gold   input2))))
+
+(define-test day9
+  (let ((input1 (day9-silver-parse (test-file 8)))
+        (input2 (day9-gold-parse (test-file 8))))
+    (is = 15 (day8-silver input1))
+    (is = 1 (day8-gold   input2))))
 
