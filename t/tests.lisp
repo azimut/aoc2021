@@ -53,3 +53,8 @@
     (is = 15   (day9-silver input1))
     (is = 1134 (day9-gold array mask))))
 
+(define-test day10
+  (let ((input1 (day10-silver-parse (test-file 10))))
+    (is = 26397  (day10-silver input1))
+    (is = 288957 (day10-gold   input1))))
+
