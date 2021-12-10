@@ -26,7 +26,7 @@
     (#\< #\>)))
 
 (defun opening-p (char)
-  (member char '(#\( #\[ #\{ #\<)))
+  (position char "([{<"))
 
 (defun score-char (char)
   (ecase char

@@ -20,7 +20,7 @@
           :do (push char opening-chars)
         :else
           :do (pop opening-chars)
-        :finally (return (map 'string #'identity (mapcar #'closing-for opening-chars)))))
+        :finally (return (coerce (mapcar #'closing-for opening-chars) 'string))))
 
 (define-modify-macro mulf (x) *)
 (defun score-completion (completion-string)
