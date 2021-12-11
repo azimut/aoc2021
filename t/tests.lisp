@@ -58,3 +58,7 @@
     (is = 26397  (day10-silver input1))
     (is = 288957 (day10-gold   input1))))
 
+(define-test day11
+  (let ((input1 (day9-silver-parse (test-file 11))))
+    (is = 1656 (day11-silver input1 100))
+    (is =  195 (day11-gold   input1 999))))
