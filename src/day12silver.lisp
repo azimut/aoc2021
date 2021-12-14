@@ -7,15 +7,15 @@
                 "start"
                 "end")))
 
+;; I don't know what I am doing...sorta
+;; https://www.youtube.com/watch?v=TlYExiAAbHo&t=742s
 (defun find-paths (adjacencies counter from to)
   (if (string/= from to)
       (iter (for adj in (gethash from adjacencies))
         (when (not (dead-end-p adj counter))
-          (summing
-            (prog2
-                (setf (gethash from counter) 1)
-                (find-paths adjacencies counter adj to)
-              (setf (gethash from counter) 0)))))
+          (setf (gethash from counter) 1)
+          (summing (find-paths adjacencies counter adj to))
+          (setf (gethash from counter) 0)))
       1))
 
 (defun dead-end-p (edge counter)
