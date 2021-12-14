@@ -62,3 +62,11 @@
   (let ((input1 (day9-silver-parse (test-file 11))))
     (is = 1656 (day11-silver input1 100))
     (is =  195 (day11-gold   input1 999))))
+
+(define-test day12
+  (let ((i1 (day12-silver-parse (asdf:system-relative-pathname :aoc2021 "static/day/12/test1")))
+        (i2 (day12-silver-parse (asdf:system-relative-pathname :aoc2021 "static/day/12/test2")))
+        (i3 (day12-silver-parse (asdf:system-relative-pathname :aoc2021 "static/day/12/test3"))))
+    (is =  10 (day12-silver i1))
+    (is =  19 (day12-silver i2))
+    (is = 226 (day12-silver i3))))
