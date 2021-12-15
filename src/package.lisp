@@ -66,4 +66,9 @@
    ;; Day 13
    #:day13-silver
    #:day13-gold
-   #:day13-silver-parse))
+   #:day13-silver-parse
+   ;; Day 14
+   #:day14-silver
+   #:day14-gold
+   #:day14-silver-parse
+   #:day14-gold-parse))

@@ -77,3 +77,9 @@
 (define-test day13
   (let ((input1 (day13-silver-parse (test-file 13))))
     (is = 17 (day13-silver input1))))
+
+(define-test day14
+  (let ((i1 (day14-silver-parse (test-file 14)))
+        (i2 (day14-gold-parse   (test-file 14))))
+    (is = 0 (day14-silver i1))
+    (is = 0 (day14-gold   i2))))
