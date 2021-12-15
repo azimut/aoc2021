@@ -11,6 +11,7 @@
       (values (reduce
                #'+
                (make-array (array-total-size matrix)
+                           :element-type 'bit
                            :displaced-to matrix))
               (array-dimensions matrix)
               matrix)))

@@ -8,6 +8,7 @@
       (reduce
        #'+
        (make-array (array-total-size mat)
+                   :element-type 'bit
                    :displaced-to mat)))))
 
 (defun fold-up (at matrix)
@@ -62,7 +63,7 @@
 (defun pairs-to-grid (pairs)
   (let ((h (1+ (reduce #'max (mapcar #'second pairs))))
         (w (1+ (reduce #'max (mapcar #'first  pairs)))))
-    (values (make-array `(,h ,w))
+    (values (make-array `(,h ,w) :element-type 'bit)
             `(,h ,w))))
 
 (defun fold-to-pair (fold)
