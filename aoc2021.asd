@@ -7,10 +7,11 @@
   :pathname "src"
   :depends-on (#:alexandria
                #:arrows
-               #:str
                #:cl-oju
+               #:iterate
+               #:select
                #:serapeum
-               #:iterate)
+               #:str)
   :components ((:file "package")
                (:file "utils")
                (:file "day1")

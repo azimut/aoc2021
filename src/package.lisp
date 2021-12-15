@@ -1,12 +1,13 @@
 (uiop:define-package #:aoc2021
   (:mix #:cl #:arrows #:alexandria #:cl-oju #:iterate
         #:str)
+  (:import-from #:select #:select)
   (:import-from #:serapeum
                 #:filter #:filter-map #:mapply #:op
                 #:href #:href-default
                 #:pop-assoc
                 #:queue #:deq #:enq #:qappend
-                #:lret)
+                #:lret #:lret*)
   (:export
    ;; util.lisp
    #:test-file
@@ -61,4 +62,8 @@
    #:day12-silver
    #:day12-gold
    #:day12-silver-parse
-   #:day12-gold-parse))
+   #:day12-gold-parse
+   ;; Day 13
+   #:day13-silver
+   #:day13-gold
+   #:day13-silver-parse))
