@@ -3,9 +3,12 @@
         #:str)
   (:import-from #:select #:select)
   (:import-from #:serapeum
+                #:mvlet #:mvlet*
+                #:split-sequence
+                #:fork
                 #:filter #:filter-map #:mapply #:op
-                #:href #:href-default
-                #:pop-assoc
+                #:href #:href-default #:dict
+                #:pop-assoc #:assocadr
                 #:queue #:deq #:enq #:qappend
                 #:lret #:lret*)
   (:export
@@ -71,4 +74,9 @@
    #:day14-silver
    #:day14-gold
    #:day14-silver-parse
-   #:day14-gold-parse))
+   #:day14-gold-parse
+   ;; Day 15
+   #:day15-silver
+   #:day15-gold
+   #:day15-silver-parse
+   #:day15-gold-parse))

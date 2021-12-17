@@ -74,6 +74,7 @@
     (is =  103 (day12-gold   i2))
     (is = 3509 (day12-gold   i3))))
 
+;; FIXME: mvlet
 (define-test day13
   (let ((input1 (day13-silver-parse (test-file 13))))
     (is = 17 (day13-silver input1))))
@@ -81,5 +82,13 @@
 (define-test day14
   (let ((i1 (day14-silver-parse (test-file 14)))
         (i2 (day14-gold-parse   (test-file 14))))
-    (is = 0 (day14-silver i1))
-    (is = 0 (day14-gold   i2))))
+    (is = 1588 (day14-silver i1))
+    ;;(is = 0 (day14-gold   i2))
+    ))
+
+(define-test day15
+  (let ((i1 (day15-silver-parse (test-file 15)))
+        (i2 (day15-gold-parse   (test-file 15))))
+    (is = 40 (day15-silver i1))
+    ;;(is = 0 (day15-gold   i2))
+    ))

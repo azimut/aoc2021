@@ -6,6 +6,7 @@
   :serial t
   :pathname "src"
   :depends-on (#:alexandria
+               #:array-operations
                #:arrows
                #:cl-oju
                #:iterate
