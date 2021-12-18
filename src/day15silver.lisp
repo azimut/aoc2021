@@ -34,12 +34,6 @@
     (setf (row-major-aref visits node) T)
     (pop costs)))
 
-(defun make-costs (size)
-  (iter (repeat (1- size))
-    (for i from 1)
-    (collecting `(,i ,most-positive-fixnum) into res)
-    (finally (return (cons '(0 0) res)))))
-
 (defun add-cost (costs new-element)
   (prog1 costs
     (setf costs (delete (first new-element) costs :key #'first :test #'=))
@@ -47,6 +41,12 @@
                              :key #'second)))
       (push new-element (cdr (drop (1- i) costs)))
       (push new-element (cdr (last costs))))))
+
+(defun make-costs (size)
+  (iter (repeat (1- size))
+    (for i from 1)
+    (collecting `(,i ,most-positive-fixnum) into res)
+    (finally (return (cons '(0 0) res)))))
 
 (defun make-risk-matrix (file)
   (let* ((byte-vector (read-file-into-byte-vector file))
@@ -57,10 +57,10 @@
           (aops:reshape <> `(,space-position t)))))
 
 (defun make-adjacency-hash (matrix)
-  (lret ((cols (array-dimension matrix 0))
-         (size (array-total-size matrix))
-         (hash (dict)))
-    (dotimes (i size)
+  (let ((cols (array-dimension matrix 0))
+        (size (array-total-size matrix))
+        (hash (dict)))
+    (dotimes (i size hash)
       (setf
        (href hash i)
        (remove
