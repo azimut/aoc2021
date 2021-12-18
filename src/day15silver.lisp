@@ -34,8 +34,7 @@
     (setf (row-major-aref visits node) T)
     (pop costs)))
 
-(declaim (inline add-cost))
-(defun add-cost (costs new-element)
+(defsubst add-cost (costs new-element)
   (prog1 costs
     (setf costs (delete (first new-element) costs :key #'first :test #'=))
     (let ((i (position-if (op (>= _ (second new-element))) costs

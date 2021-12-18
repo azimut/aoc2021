@@ -3,6 +3,7 @@
         #:str)
   (:import-from #:select #:select)
   (:import-from #:serapeum
+                #:defsubst
                 #:mvlet #:mvlet*
                 #:split-sequence
                 #:fork
