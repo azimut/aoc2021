@@ -1,8 +1,10 @@
 (in-package #:aoc2021)
 
 (defun day15-silver-parse (file)
-  (let* ((risk-matrix (make-risk-matrix file))
-         (risk-matrix-size (array-total-size risk-matrix))
+  (make-risk-matrix file))
+
+(defun day15-silver (risk-matrix)
+  (let* ((risk-matrix-size (array-total-size risk-matrix))
          (adjacencies (make-adjacency-hash risk-matrix))
          (visits (make-array (array-dimensions risk-matrix) :initial-element NIL))
          (prevs  (make-array (array-dimensions risk-matrix)))
@@ -10,7 +12,7 @@
     (dijkstra (1- risk-matrix-size) risk-matrix
               adjacencies visits prevs costs)
     (+ (retrace-and-sum (1- risk-matrix-size) risk-matrix prevs)
-       (row-major-aref risk-matrix (1- risk-matrix-size)))));; *sigh*
+       (row-major-aref risk-matrix (1- risk-matrix-size))))) ;; *sigh*
 
 (defun retrace-and-sum (from matrix prevs)
   (iter (for prev = (row-major-aref prevs from))
@@ -23,7 +25,7 @@
 (defun dijkstra (to matrix adjacencies visits prevs costs)
   (iter (for (node cost) = (first costs))
     (while (and node (/= node to)))
-    (iter (for adj in (href adjacencies node))
+    (dolist (adj (href adjacencies node))
       (when (and (not (row-major-aref visits adj))
                  (< (+ cost (row-major-aref matrix adj))
                     (assocadr adj costs)))
@@ -58,7 +60,7 @@
   (lret ((cols (array-dimension matrix 0))
          (size (array-total-size matrix))
          (hash (dict)))
-    (iter (for i from 0 below size)
+    (dotimes (i size)
       (setf
        (href hash i)
        (remove
