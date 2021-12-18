@@ -89,6 +89,5 @@
 (define-test day15
   (let ((i1 (day15-silver-parse (test-file 15)))
         (i2 (day15-gold-parse   (test-file 15))))
-    (is = 40 (day15-silver i1))
-    ;;(is = 0 (day15-gold   i2))
-    ))
+    (is =  40 (day15-silver i1))
+    (is = 315 (day15-gold   i2))))

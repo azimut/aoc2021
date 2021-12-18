@@ -34,13 +34,15 @@
     (setf (row-major-aref visits node) T)
     (pop costs)))
 
+(declaim (inline add-cost))
 (defun add-cost (costs new-element)
   (prog1 costs
     (setf costs (delete (first new-element) costs :key #'first :test #'=))
-    (if-let ((i (position-if (op (>= _ (second new-element))) costs
-                             :key #'second)))
-      (push new-element (cdr (drop (1- i) costs)))
-      (push new-element (cdr (last costs))))))
+    (let ((i (position-if (op (>= _ (second new-element))) costs
+                          :key #'second)))
+      (cond ((null i)  (push new-element (cdr (last costs))))
+            ((zerop i) (push new-element (cdr costs)))
+            (t         (push new-element (cdr (drop (1- i) costs))))))))
 
 (defun make-costs (size)
   (iter (repeat (1- size))
