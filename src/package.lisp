@@ -6,6 +6,7 @@
                 #:defsubst
                 #:mvlet #:mvlet*
                 #:split-sequence
+                #:make-heap #:heap-insert #:heap-extract-maximum
                 #:fork
                 #:filter #:filter-map #:mapply #:op
                 #:href #:href-default #:dict
