@@ -15,7 +15,7 @@
   (destructuring-bind (h w) (array-dimensions matrix)
     (lret ((down (select matrix (iota (- h at 1) :start (1+ at)) t))
            (up   (select matrix (iota at) t)))
-      (iter (for col below w)
+      (dotimes (col w)
         (iter
           (for up-row   from 0  below at)
           (for down-row from (1- (array-dimension down 0)) downto 0)
@@ -27,7 +27,7 @@
   (destructuring-bind (h w) (array-dimensions matrix)
     (lret ((left  (select matrix t (iota at)))
            (right (select matrix t (iota (- w at 1) :start (1+ at)))))
-      (iter (for row below h)
+      (dotimes (row h)
         (iter
           (for left-col from 0 below at)
           (for right-col from (1- (array-dimension right 1)) downto 0)
