@@ -8,6 +8,8 @@
   :depends-on (#:alexandria
                #:array-operations
                #:arrows
+               #:bitio
+               #:bit-smasher
                #:cl-oju
                #:iterate
                #:select

@@ -91,3 +91,9 @@
         (i2 (day15-gold-parse   (test-file 15))))
     (is =  40 (day15-silver i1))
     (is = 315 (day15-gold   i2))))
+
+(define-test day16
+  (is =  16 (day16-silver (day16-silver-parse "8A004A801A8002F478")))
+  (is =  12 (day16-silver (day16-silver-parse "620080001611562C8802118E34")))
+  (is =  23 (day16-silver (day16-silver-parse "C0015000016115A2E0802F182340")))
+  (is =  31 (day16-silver (day16-silver-parse "A0016C880162017C3686B18A3D4780"))))
