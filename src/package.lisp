@@ -81,4 +81,10 @@
    #:day15-silver
    #:day15-gold
    #:day15-silver-parse
-   #:day15-gold-parse))
+   #:day15-gold-parse
+   ;; Day 16
+   #:day16-silver
+   #:day16-gold
+   #:day16-silver-parse
+   #:day16-gold-parse
+   ))
