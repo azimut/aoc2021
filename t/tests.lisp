@@ -105,3 +105,13 @@
   (is =  0 (day16-gold (day16-silver-parse "F600BC2D8F")))
   (is =  0 (day16-gold (day16-silver-parse "9C005AC2F8F0")))
   (is =  1 (day16-gold (day16-silver-parse "9C0141080250320F1802104A08"))))
+
+(define-test day18
+  (let ((i1 (day18-silver-parse (test-file 18)))
+        (i2 (day18-silver-parse "[[[[6,6],[7,6]],[[7,7],[7,0]]],[[[7,7],[7,7]],[[7,8],[9,9]]]]")))
+    (is
+     = 4140
+     (day18-silver i1))
+    (is
+     = 4140
+     (day18-silver i2))))
