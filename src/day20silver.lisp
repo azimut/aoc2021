@@ -12,9 +12,7 @@
           (setf (aref mat1 x y)
                 (cell-to-value mat2 x y encoder dimx dimy))))
       (copy-mat mat2 mat1))
-    (values (reduce #'+ (aops:flatten mat2))
-            (reduce #'+ (aops:flatten mat1))
-            (reduce #'+ (aops:flatten input)))))
+    (reduce #'+ (aops:flatten mat2))))
 
 (defun zero-mat (mat1)
   (dotimes (i (array-total-size mat1))
