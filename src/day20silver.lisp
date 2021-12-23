@@ -1,13 +1,11 @@
 (in-package #:aoc2021)
 
-;; NOT 5372 - too high
-
 (defun day20-silver (encoder input times)
-  (let* ((mat1 (pad-matrix times input))
-         (mat2 (pad-matrix times input))
+  (let* ((mat1 (pad-matrix (+ 2 times) input))
+         (mat2 (pad-matrix (+ 2 times) input))
          (dimx (array-dimension mat1 0))
          (dimy (array-dimension mat1 1)))
-    (dotimes (i times)
+    (dotimes (z times)
       (zero-mat mat1)
       (dotimes (x dimx)
         (dotimes (y dimy)
@@ -17,8 +15,6 @@
     (values (reduce #'+ (aops:flatten mat2))
             (reduce #'+ (aops:flatten mat1))
             (reduce #'+ (aops:flatten input)))))
-
-
 
 (defun zero-mat (mat1)
   (dotimes (i (array-total-size mat1))
@@ -36,7 +32,7 @@
       (iter (for dy :from (1+ y) :downto (1- y))
         (setf (ldb (byte 1 bit-index) index)
               (if (or (minusp dx) (minusp dy) (>= dx dimx) (>= dy dimy))
-                  0
+                  (aref input x y)
                   (aref input dx dy)))
         (incf bit-index)))
     (aref encoder index)))
