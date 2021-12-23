@@ -115,3 +115,9 @@
     (is
      = 4140
      (day18-silver i2))))
+
+(define-test day20
+  (multiple-value-bind (encoder input)
+      (day20-parse (test-file 20))
+    (is =   35 (day20 encoder input  2))
+    (is = 3351 (day20 encoder input 50))))
