@@ -4,7 +4,6 @@
   :license  "MIT"
   :version "0.0.1"
   :serial t
-  :pathname "src"
   :depends-on (#:alexandria
                #:array-operations
                #:arrows
