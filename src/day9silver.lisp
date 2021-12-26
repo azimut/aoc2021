@@ -10,7 +10,7 @@
     (iterate (for y below (array-dimension array 1))
       (when (< (aref array x y)
                (apply #'min (adjacent array x y)))
-        (in outer (collecting (aref array x y)))))))
+        (in outer (collect (aref array x y)))))))
 
 (defun adjacent (array x y)
   (iterate outer (for dx in '(-1 0 1))
@@ -31,6 +31,6 @@
        (lines)
        (mapcar
         (serapeum:op
-          (map 'list (compose #'parse-integer #'string )
+          (map 'list (compose #'parse-integer #'string)
                _)))
        (list-to-array)))

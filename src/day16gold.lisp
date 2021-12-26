@@ -8,3 +8,7 @@
 ;; 6 < 1 or 0
 ;; 7 = 1 or 0
 (defun day16-gold (input))
+
+(defun read-header (buf)
+  (bitio:read-bits buf 3)
+  (bitio:read-bits buf 3))

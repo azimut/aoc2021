@@ -1,8 +1,9 @@
 (in-package #:aoc2021)
 
-(defun day16-silver (packets-string)
+(defun day16-silver (bitio &aux (input (read-packet bitio)))
+  (print input)
   (iter (for (desc value)
-             :on (read-packet packets-string)
+             :on input
              :by #'cddr)
     (when (eq :version desc)
       (summing value))))

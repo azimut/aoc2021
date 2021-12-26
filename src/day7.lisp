@@ -22,23 +22,23 @@
                     :do (incf (aref fuels pos) (abs (- crab pos)))))
     (reduce #'min fuels)))
 
-(declaim (inline movement-to-fuel))
-(defun movement-to-fuel (from to)
+;; ? https://en.wikipedia.org/wiki/Triangular_number
+;; https://mathworld.wolfram.com/ArithmeticSeries.html
+(declaim (inline mvf))
+(defun mvf (from to)
   (declare (optimize (speed 3)) (fixnum from to))
-  (loop :for i :from (min from to) :below (max from to)
-        :with acc = -1
-        :summing (1+ (incf (the fixnum acc)))))
+  (let ((n (abs (- from to))))
+    (declare (fixnum n))
+    (/ (* n (+ n 1)) 2)))
 
 (defun day7-gold (text)
+  (declare (optimize (speed 3)))
   (let* ((crabs   (text-to-crabs text))
          (max-pos (apply #'max crabs))
          (min-pos (apply #'min crabs))
-         (fuels   (make-array (- max-pos min-pos))))
-    (loop :for pos :from min-pos :below max-pos
+         (fuels   (make-array (- max-pos min-pos) :element-type 'fixnum)))
+    (loop :for pos :of-type fixnum :from min-pos :below max-pos
           :do (loop :for crab :in crabs
                     :do (incf (aref fuels pos)
-                              (movement-to-fuel crab pos))))
+                              (mvf crab pos))))
     (reduce #'min fuels)))
-
-
-

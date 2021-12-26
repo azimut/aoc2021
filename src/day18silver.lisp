@@ -9,12 +9,6 @@
 (defun silverfish-reduce (fish)
   )
 
-(defun reduce-explode (fish &aux (needle (find-cons-at-4-depth fish)))
-  (when needle
-    (flet ((a1 (node)
-             (length= 4 (flatten node))))
-      (serapeum:map-tree #'a1 fish))))
-
 (defun find-cons-at-4-depth (fish &aux (position 0))
   (labels
       ((cons-of-nums-p (cons)
@@ -29,6 +23,13 @@
            ((and (= target depth) (cons-of-nums-p tree))
             (return-from find-cons-at-4-depth (cons position tree))))))
     (tree-walk fish 5 0)))
+
+(defun reduce-explode (fish &aux (depth 0))
+  (flet ((foo (node)
+           (when (and (consp node) (= 4 (incf depth)))
+             )
+           node))
+    (serapeum:map-tree #'foo fish)))
 
 (defun reduce-split (fish &aux flag)
   (serapeum:leaf-map
@@ -46,6 +47,20 @@
          (string input))
        (lines)
        (mapcar #'silverfish-cons)))
+
+(defstruct node
+  (car   nil)
+  (cdr   nil)
+  (depth 0)
+  (pos   0))
+
+(defun silverfish-cons (string)
+  (->> string
+       (replace-all "," " :cdr ")
+       (replace-all "]" " :depth 0 :pos 0)")
+       (replace-all "[" "#S(NODE :car " )
+       (read-from-string)))
+
 
 (defun silverfish-cons (string)
   (->> string
