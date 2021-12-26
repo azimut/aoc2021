@@ -121,3 +121,7 @@
       (day20-parse (test-file 20))
     (is =   35 (day20 encoder input  2))
     (is = 3351 (day20 encoder input 50))))
+
+(define-test day21
+  (let ((input (day21-silver-parse (test-file 21))))
+    (is = #.(* 745 993) (day21-silver input))))

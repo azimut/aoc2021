@@ -1,5 +1,8 @@
 (in-package #:aoc2021)
 
+(defun zip (&rest lists)
+  (apply #'mapcar #'list lists))
+
 (defun mapcat (function &rest lists)
   (apply #'alexandria:mappend function lists))
 

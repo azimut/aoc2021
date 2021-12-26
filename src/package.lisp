@@ -1,6 +1,8 @@
 (uiop:define-package #:aoc2021
   (:mix #:cl #:arrows #:alexandria #:cl-oju #:iterate
         #:str)
+  (:import-from #:sb-sequence
+                #:dosequence)
   (:import-from #:select #:select)
   (:import-from #:serapeum
                 #:defsubst
@@ -12,7 +14,8 @@
                 #:href #:href-default #:dict
                 #:pop-assoc #:assocadr
                 #:queue #:deq #:enq #:qappend
-                #:lret #:lret*)
+                #:lret #:lret*
+                #:batches)
   (:export
    ;; util.lisp
    #:test-file
