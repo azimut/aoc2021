@@ -24,6 +24,8 @@ jobs:
           key: "${{ env.cache-name }}-${{ github.sha }}"
           restore-keys: "${{ env.cache-name }}"
 
+      - run: ls -l ~/quicklisp/
+      - run: ls -l /github/home/quicklisp/
       - run: /usr/local/bin/install-quicklisp
         if: hashFiles('/github/home/quicklisp/setup.lisp') == ''
 
