@@ -26,6 +26,8 @@ jobs:
 
       - run: ls -l
       - run: pwd
+      - run: echo "${{ hashFiles('/github/home/quicklisp/setup.lisp') }}"
+      - run: echo "${{ hashFiles('../../../github/home/quicklisp/setup.lisp') }}"
       - run: /usr/local/bin/install-quicklisp
         if: hashFiles('../../../github/home/quicklisp/setup.lisp') == ''
 
