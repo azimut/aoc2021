@@ -37,7 +37,7 @@ jobs:
 
       - name: Run tests
         run: |
-          sbcl --non-interactive \
+          sbcl --non-interactive --no-sysinit --no-userinit \
                --load ~/quicklisp/setup.lisp \
                --load aoc2021.asd \
                --eval "(ql:quickload :aoc2021/test)" \
