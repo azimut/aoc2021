@@ -40,5 +40,6 @@ jobs:
           sbcl --non-interactive \
                --load ~/quicklisp/setup.lisp \
                --load aoc2021.asd \
+               --eval "(ql:quickload :parachute)" \
                --eval "(ql:quickload :aoc2021)" \
                --eval "(asdf:test-system :aoc2021)"
