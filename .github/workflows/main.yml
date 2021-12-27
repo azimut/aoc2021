@@ -37,7 +37,5 @@ jobs:
         run: |
           sbcl --non-interactive --no-sysinit --no-userinit \
                --load ~/quicklisp/setup.lisp \
-               -e "(ql:quickload :aoc2021)" \
-               -e "(ql:quickload :aoc2021/test)" \
-               -e "(ql:quickload :parachute)" \
-               -e "(when (eq :FAILED (parachute:status (parachute:test 'aoc2021-test))) (error 'testfailed))"
+               --load aoc2021.asd \
+               -e "(asdf:test-system :aoc2021)"
