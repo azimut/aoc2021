@@ -42,4 +42,4 @@ jobs:
                --load aoc2021.asd \
                --eval "(ql:quickload :parachute)" \
                --eval "(ql:quickload :aoc2021)" \
-               --eval "(asdf:test-system :aoc2021)"
+               --eval "(parachute:test-toplevel 'aoc2021-test)"
