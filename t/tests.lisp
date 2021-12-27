@@ -64,9 +64,10 @@
     (is = 288957 (day10-gold   input))))
 
 (define-test day11
-  (let ((input (day9-silver-parse (test-file 11))))
-    (is = 1656 (day11-silver input 100))
-    (is =  195 (day11-gold   input 999))))
+  (let ((input1 (day9-silver-parse (test-file 11)))
+        (input2 (day9-silver-parse (test-file 11))))
+    (is = 1656 (day11-silver input1 100))
+    (is =  195 (day11-gold   input2 999))))
 
 (define-test day12
   (let ((i1 (day12-silver-parse (asdf:system-relative-pathname :aoc2021 "static/day/12/test1")))
@@ -79,10 +80,10 @@
     (is =  103 (day12-gold   i2))
     (is = 3509 (day12-gold   i3))))
 
-;; FIXME: mvlet
 (define-test day13
-  (let ((input1 (day13-silver-parse (test-file 13))))
-    (is = 17 (day13-silver input1))))
+  (multiple-value-bind (m f)
+      (day13-silver-parse (test-file 13))
+    (is = 17 (day13-silver m f))))
 
 (define-test day14
   (let ((i1 (day14-silver-parse (test-file 14)))

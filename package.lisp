@@ -64,15 +64,13 @@
    ;; Day 11
    #:day11-silver
    #:day11-gold
-   #:day11-silver-parse
-   #:day11-gold-parse
    ;; Day 12
    #:day12-silver
    #:day12-gold
    #:day12-silver-parse
    #:day12-gold-parse
    ;; Day 13
-   #:day13-silver
+   #:day13-silver #:x #:y
    #:day13-gold
    #:day13-silver-parse
    ;; Day 14

@@ -32,6 +32,10 @@
                (:file "day11gold")
                (:file "day12silver")
                (:file "day12gold")
+               (:file "day13silver")
+               (:file "day13gold")
+               (:file "day15silver")
+               (:file "day15gold")
                (:file "day20"))
   :in-order-to ((asdf:test-op (asdf:test-op :aoc2021/test))))
 
