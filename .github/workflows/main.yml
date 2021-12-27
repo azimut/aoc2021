@@ -35,7 +35,6 @@ jobs:
         run: |
           sbcl --non-interactive --no-sysinit --no-userinit \
                --load ~/quicklisp/setup.lisp \
-               --load aoc2021.asd \
                -e "(ql:quickload :aoc2021)" \
                -e "(ql:quickload :aoc2021/test)" \
                -e "(ql:quickload :parachute)" \
