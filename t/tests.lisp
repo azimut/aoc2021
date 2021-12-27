@@ -81,53 +81,53 @@
     (is = 3509 (day12-gold   i3))))
 
 (define-test day13
-  (multiple-value-bind (m f)
-      (day13-silver-parse (test-file 13))
-    (is = 17 (day13-silver m f))))
+    (multiple-value-bind (m f)
+        (day13-silver-parse (test-file 13))
+      (is = 17 (day13-silver m f))))
 
-(define-test day14
-  (let ((i1 (day14-silver-parse (test-file 14)))
-        (i2 (day14-gold-parse   (test-file 14))))
-    (is = 1588 (day14-silver i1))
-    ;;(is = 0 (day14-gold   i2))
-    ))
+;; (define-test day14
+;;   (let ((i1 (day14-silver-parse (test-file 14)))
+;;         (i2 (day14-gold-parse   (test-file 14))))
+;;     (is = 1588 (day14-silver i1))
+;;     ;;(is = 0 (day14-gold   i2))
+;;     ))
 
-(define-test day15
-  (let ((i1 (day15-silver-parse (test-file 15)))
-        (i2 (day15-gold-parse   (test-file 15))))
-    (is =  40 (day15-silver i1))
-    (is = 315 (day15-gold   i2))))
+;; (define-test day15
+;;   (let ((i1 (day15-silver-parse (test-file 15)))
+;;         (i2 (day15-gold-parse   (test-file 15))))
+;;     (is =  40 (day15-silver i1))
+;;     (is = 315 (day15-gold   i2))))
 
-(define-test day16
-  (is = 16 (day16-silver (day16-silver-parse "8A004A801A8002F478")))
-  (is = 12 (day16-silver (day16-silver-parse "620080001611562C8802118E34")))
-  (is = 23 (day16-silver (day16-silver-parse "C0015000016115A2E0802F182340")))
-  (is = 31 (day16-silver (day16-silver-parse "A0016C880162017C3686B18A3D4780")))
-  (is =  3 (day16-gold (day16-silver-parse "C200B40A82")))
-  (is = 54 (day16-gold (day16-silver-parse "04005AC33890")))
-  (is =  7 (day16-gold (day16-silver-parse "880086C3E88112")))
-  (is =  9 (day16-gold (day16-silver-parse "CE00C43D881120")))
-  (is =  1 (day16-gold (day16-silver-parse "D8005AC2A8F0")))
-  (is =  0 (day16-gold (day16-silver-parse "F600BC2D8F")))
-  (is =  0 (day16-gold (day16-silver-parse "9C005AC2F8F0")))
-  (is =  1 (day16-gold (day16-silver-parse "9C0141080250320F1802104A08"))))
+;; (define-test day16
+;;   (is = 16 (day16-silver (day16-silver-parse "8A004A801A8002F478")))
+;;   (is = 12 (day16-silver (day16-silver-parse "620080001611562C8802118E34")))
+;;   (is = 23 (day16-silver (day16-silver-parse "C0015000016115A2E0802F182340")))
+;;   (is = 31 (day16-silver (day16-silver-parse "A0016C880162017C3686B18A3D4780")))
+;;   (is =  3 (day16-gold (day16-silver-parse "C200B40A82")))
+;;   (is = 54 (day16-gold (day16-silver-parse "04005AC33890")))
+;;   (is =  7 (day16-gold (day16-silver-parse "880086C3E88112")))
+;;   (is =  9 (day16-gold (day16-silver-parse "CE00C43D881120")))
+;;   (is =  1 (day16-gold (day16-silver-parse "D8005AC2A8F0")))
+;;   (is =  0 (day16-gold (day16-silver-parse "F600BC2D8F")))
+;;   (is =  0 (day16-gold (day16-silver-parse "9C005AC2F8F0")))
+;;   (is =  1 (day16-gold (day16-silver-parse "9C0141080250320F1802104A08"))))
 
-(define-test day18
-  (let ((i1 (day18-silver-parse (test-file 18)))
-        (i2 (day18-silver-parse "[[[[6,6],[7,6]],[[7,7],[7,0]]],[[[7,7],[7,7]],[[7,8],[9,9]]]]")))
-    (is
-     = 4140
-     (day18-silver i1))
-    (is
-     = 4140
-     (day18-silver i2))))
+;; (define-test day18
+;;   (let ((i1 (day18-silver-parse (test-file 18)))
+;;         (i2 (day18-silver-parse "[[[[6,6],[7,6]],[[7,7],[7,0]]],[[[7,7],[7,7]],[[7,8],[9,9]]]]")))
+;;     (is
+;;      = 4140
+;;      (day18-silver i1))
+;;     (is
+;;      = 4140
+;;      (day18-silver i2))))
 
-(define-test day20
-  (multiple-value-bind (encoder input)
-      (day20-parse (test-file 20))
-    (is =   35 (day20 encoder input  2))
-    (is = 3351 (day20 encoder input 50))))
+;; (define-test day20
+;;   (multiple-value-bind (encoder input)
+;;       (day20-parse (test-file 20))
+;;     (is =   35 (day20 encoder input  2))
+;;     (is = 3351 (day20 encoder input 50))))
 
-(define-test day21
-  (let ((input (day21-silver-parse (test-file 21))))
-    (is = #.(* 745 993) (day21-silver input))))
+;; (define-test day21
+;;   (let ((input (day21-silver-parse (test-file 21))))
+;;     (is = #.(* 745 993) (day21-silver input))))
