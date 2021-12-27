@@ -24,12 +24,13 @@ jobs:
           key: "${{ env.cache-name }}-${{ github.sha }}"
           restore-keys: "${{ env.cache-name }}"
 
-      - run: ls -l
-      - run: pwd
-      - run: echo "${{ hashFiles('/github/home/quicklisp/setup.lisp') }}"
-      - run: echo "${{ hashFiles('../../../github/home/quicklisp/setup.lisp') }}"
+      - name: "Check file existence"
+        uses: andstor/file-existence-action@v1
+        id: check_files
+        with:
+          files: "~/quicklisp/setup.lisp"
       - run: /usr/local/bin/install-quicklisp
-        if: hashFiles('../../../github/home/quicklisp/setup.lisp') == ''
+        if: steps.check_files.outputs.files_exists != 'true'
 
       - name: Deps not on Quicklisp
         run: |
