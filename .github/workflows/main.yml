@@ -1,49 +1,41 @@
-name: Build aoc2021
-
+name: CI
 on:
   push:
     paths-ignore:
       - 'LICENSE'
       - 'README.org'
-
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: clfoundation/sbcl:2.1.11
     steps:
       - uses: actions/checkout@v2
-
-      - name: Grant All Perms to Make Cache Restoring Possible
-        run: |
-          sudo mkdir -p /usr/local/etc/roswell
-          sudo chown "${USER}" /usr/local/etc/roswell
-          sudo chown "${USER}" /usr/local/bin
       - uses: actions/cache@v2
         id: cache
         env:
-          cache-name: cache-roswell
+          cache-name: cache-alpine
         with:
           path: |
-            /usr/local/bin/ros
-            /usr/local/etc/roswell
+            ~/quicklisp/
             ~/.cache/common-lisp/
-            ~/.roswell
-            .qlot
           key: "${{ env.cache-name }}-${{ github.sha }}"
           restore-keys: "${{ env.cache-name }}"
-      - name: Restore Path To Cached Files
-        run: |
-          echo $HOME/.roswell/bin >> $GITHUB_PATH
-          echo .qlot/bin >> $GITHUB_PATH
 
-      - uses: 40ants/setup-lisp@v1
-        with:
-          asdf-system: aoc2021
-          qlfile-template: |
-            git trivialtests https://github.com/eigenhombre/trivialtests.git
-            git cl-oju https://github.com/eigenhombre/cl-oju.git
-
-      - name: run tests
+      - name: Deps not on Quicklisp
         run: |
-          ros -e "(ql:quickload :aoc2021/test)" \
-              -e "(ql:quickload :parachute)" \
-              -e "(when (eq :FAILED (parachute:status (parachute:test 'aoc2021-test))) (error 'testfailed))"
+          cd ~/quicklisp/
+          git clone --depth=1 https://github.com/eigenhombre/trivialtests.git
+          git clone --depth=1 https://github.com/eigenhombre/cl-oju.git
+          (cd trivialtests/ && git pull )
+          (cd cl-oju/ && git pull )
+
+      - name: Run tests
+        run: |
+          sbcl --non-interactive --no-sysinit --no-userinit \
+               --load ~/quicklisp/setup.lisp \
+               --load aoc2021.asd \
+               -e "(ql:quickload :aoc2021)" \
+               -e "(ql:quickload :aoc2021/test)" \
+               -e "(ql:quickload :parachute)" \
+               -e "(when (eq :FAILED (parachute:status (parachute:test 'aoc2021-test))) (error 'testfailed))"
