@@ -26,9 +26,8 @@ jobs:
 
       - uses: andstor/file-existence-action@v1
         id: check_files
-        working-directory: /github/home/quicklisp/
         with:
-          files: "setup.lisp"
+          files: "/github/home/quicklisp/setup.lisp"
       - run: /usr/local/bin/install-quicklisp
         if: steps.check_files.outputs.files_exists != 'true'
 
