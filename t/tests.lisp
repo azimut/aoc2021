@@ -1,43 +1,48 @@
 (in-package #:aoc2021-test)
 
 (define-test day1
-  (is = 7 (day1-silver (slurp (test-file 1))))
-  (is = 5 (day1-gold   (slurp (test-file 1)))))
+  (let ((input (slurp (test-file 1))))
+    (is = 7 (day1-silver input))
+    (is = 5 (day1-gold   input))))
 
 (define-test day2
-  (is = 150 (day2-silver (slurp (test-file 2))))
-  (is = 900 (day2-gold   (slurp (test-file 2)))))
+  (let ((input (slurp (test-file 2))))
+    (is = 150 (day2-silver input))
+    (is = 900 (day2-gold   input))))
 
 (define-test day3
-  (is =  22 (gamma (str:lines (slurp (test-file 3)))))
-  (is =   9 (epsilon (str:lines (slurp (test-file 3)))))
-  (is = 198 (day3-silver (slurp (test-file 3))))
-  (is = 230 (day3-gold (slurp (test-file 3))))
-  (is =  23 (arrows:->> (test-file 3)
-                        (slurp)
-                        (str:lines)
-                        (o2)))
-  (is =  10 (arrows:->> (test-file 3)
-                        (slurp)
-                        (str:lines)
-                        (co2))))
+  (let ((input (slurp (test-file 3))))
+    (is =  22 (gamma (str:lines input)))
+    (is =   9 (epsilon (str:lines input)))
+    (is = 198 (day3-silver input))
+    (is = 230 (day3-gold input))
+    (is =  23 (arrows:->> input
+                          (str:lines)
+                          (o2)))
+    (is =  10 (arrows:->> input
+                          (str:lines)
+                          (co2)))))
 
 (define-test day4
-  (is = 4512 (day4-silver (slurp (test-file 4))))
-  (is = 1924 (day4-gold   (slurp (test-file 4)))))
+  (let ((input (slurp (test-file 4))))
+    (is = 4512 (day4-silver input))
+    (is = 1924 (day4-gold   input))))
 
 (define-test day5
-  (is = 5  (day5-silver (slurp (test-file 5))))
-  (is = 12 (day5-gold   (slurp (test-file 5)))))
+  (let ((input (slurp (test-file 5))))
+    (is = 5  (day5-silver input))
+    (is = 12 (day5-gold   input))))
 
 (define-test day6
-  (is =          26 (day6-silver 18 (slurp (test-file 6))))
-  (is =        5934 (day6-silver 80 (slurp (test-file 6))))
-  (is = 26984457539 (day6-gold  256 (slurp (test-file 6)))))
+  (let ((input (slurp (test-file 6))))
+    (is =          26 (day6-silver 18 input))
+    (is =        5934 (day6-silver 80 input))
+    (is = 26984457539 (day6-gold  256 input))))
 
 (define-test day7
-  (is = 37 (day7-silver (slurp (test-file 7))))
-  (is = 168 (day7-gold   (slurp (test-file 7)))))
+  (let ((input (slurp (test-file 7))))
+    (is =  37 (day7-silver input))
+    (is = 168 (day7-gold   input))))
 
 ;; (define-test day8
 ;;   (let ((input1 (day8-silver-parse (test-file 8)))
@@ -54,14 +59,14 @@
     (is = 1134 (day9-gold array mask))))
 
 (define-test day10
-  (let ((input1 (day10-silver-parse (test-file 10))))
-    (is = 26397  (day10-silver input1))
-    (is = 288957 (day10-gold   input1))))
+  (let ((input (day10-silver-parse (test-file 10))))
+    (is = 26397  (day10-silver input))
+    (is = 288957 (day10-gold   input))))
 
 (define-test day11
-  (let ((input1 (day9-silver-parse (test-file 11))))
-    (is = 1656 (day11-silver input1 100))
-    (is =  195 (day11-gold   input1 999))))
+  (let ((input (day9-silver-parse (test-file 11))))
+    (is = 1656 (day11-silver input 100))
+    (is =  195 (day11-gold   input 999))))
 
 (define-test day12
   (let ((i1 (day12-silver-parse (asdf:system-relative-pathname :aoc2021 "static/day/12/test1")))
