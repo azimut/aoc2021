@@ -27,7 +27,7 @@ jobs:
       - run: ls -l
       - run: pwd
       - run: /usr/local/bin/install-quicklisp
-        if: hashFiles('../quicklisp/setup.lisp') == ''
+        if: hashFiles('../../../github/home/quicklisp/setup.lisp') == ''
 
       - name: Deps not on Quicklisp
         run: |
