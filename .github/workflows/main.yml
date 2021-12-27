@@ -28,10 +28,10 @@ jobs:
       - name: Deps not on Quicklisp
         run: |
           cd ~/quicklisp/
-          git clone --depth=1 https://github.com/eigenhombre/trivialtests.git
-          git clone --depth=1 https://github.com/eigenhombre/cl-oju.git
+          test -d trivialtests || git clone --depth=1 https://github.com/eigenhombre/trivialtests.git
+          test -d cl-oju       || git clone --depth=1 https://github.com/eigenhombre/cl-oju.git
           (cd trivialtests/ && git pull )
-          (cd cl-oju/ && git pull )
+          (cd cl-oju/       && git pull )
 
       - name: Run tests
         run: |
