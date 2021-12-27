@@ -16,7 +16,7 @@ jobs:
       - uses: actions/cache@v2
         id: cache
         env:
-          cache-name: cache-alpine
+          cache-name: cache-container
         with:
           path: |
             ~/quicklisp/
