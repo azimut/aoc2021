@@ -24,8 +24,12 @@ jobs:
           key: "${{ env.cache-name }}-${{ github.sha }}"
           restore-keys: "${{ env.cache-name }}"
 
+      - uses: andstor/file-existence-action@v1
+        id: check_files
+        with:
+          files: "/github/home/quicklisp/setup.lisp"
       - run: /usr/local/bin/install-quicklisp
-        if: hashFiles('~/quicklisp/setup.lisp') != ''
+        if: steps.check_files.outputs.files_exists != 'true'
 
       - name: Deps not on Quicklisp
         run: |
@@ -37,7 +41,7 @@ jobs:
 
       - name: Run tests
         run: |
-          sbcl --non-interactive \
+          sbcl --non-interactive --no-sysinit --no-userinit \
                --load ~/quicklisp/setup.lisp \
                --load aoc2021.asd \
                --eval "(ql:quickload :aoc2021/test)" \
