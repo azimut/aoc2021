@@ -25,7 +25,7 @@ jobs:
           restore-keys: "${{ env.cache-name }}"
 
       - run: /usr/local/bin/install-quicklisp
-        if: hashFiles('/github/home/quicklisp/setup.lisp') != ''
+        if: hashFiles('/github/home/quicklisp/setup.lisp') == ''
 
       - name: Deps not on Quicklisp
         run: |
